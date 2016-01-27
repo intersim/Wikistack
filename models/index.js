@@ -14,6 +14,15 @@ var pageSchema = new Schema({
   author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 });
 
+pageSchema.pre('validate', function (next) {
+  if (this.title) {
+    this.urlTitle = this.title.replace(/\s+/g, '_').replace(/\W/g, '');
+  } else {
+    this.urlTitle = Math.random().toString(36).substring(2, 7);
+  }
+  next();
+});
+
 pageSchema.virtual('route').get(function () {
   return '/wiki/' + this.urlTitle;
 })
