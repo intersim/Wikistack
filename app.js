@@ -2,7 +2,6 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swig = require('swig');
-
 var app = express();
 
 app.use(morgan('tiny', 'stream'));
