@@ -10,13 +10,16 @@ router.get('/', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
+
   var page = new Page({
     title: req.body.title,
-    content: 'req.body.content'
+    content: req.body.content,
+    status: req.body.status,
   });
-  page.save();
-  res.redirect('/');
-  next();
+  page.save(function (err) {
+    if (err) console.log(err);
+    res.redirect('/');
+  });
 })
 
 router.get('/add', function (req, res, next) {
