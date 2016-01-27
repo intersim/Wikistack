@@ -3,6 +3,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swig = require('swig');
 var app = express();
+var wikiRouter = require('./routes/wiki');
 
 app.use(morgan('tiny', 'stream'));
 app.use(express.static(__dirname + '/public'));
@@ -10,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use('/wiki', wikiRouter);
 
 // point res.render to the proper directory
 app.set('views', __dirname + '/views');

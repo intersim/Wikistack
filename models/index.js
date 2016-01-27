@@ -1,15 +1,13 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-require('mongoose-type-url');
-require('mongoose-type-email');
 
 var pageSchema = new Schema({
   title:  {type: String, required: true},
-  urlTitle: { type: String, required: true },
+  urlTitle: {type: String, required: true},
   content: {type: String, required: true},
-  date: { type: Date, default: Date.now },
+  date: {type: Date, default: Date.now},
   status: String,
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 });
 
 pageSchema.virtual('route').get(function () {
@@ -18,7 +16,7 @@ pageSchema.virtual('route').get(function () {
 
 var userSchema = new Schema({
   name: {type: String, required: true},
-  email: {type: mongoose.SchemaTypes.Email, required: true, unique: true}
+  email: {type: String, required: true, unique: true}
 });
 
 var Page = mongoose.model('Page', pageSchema);
