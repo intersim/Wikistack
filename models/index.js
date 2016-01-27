@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+mongoose.connect('mongodb://localhost/wikistack'); // <= db name will be 'wikistack'
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'mongodb connection error:'));
+
 var pageSchema = new Schema({
   title:  {type: String, required: true},
   urlTitle: {type: String, required: true},
@@ -26,7 +30,3 @@ module.exports = {
   Page: Page,
   User: User
 }
-
-mongoose.connect('mongodb://localhost/wikistack'); // <= db name will be 'wikistack'
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'mongodb connection error:'));

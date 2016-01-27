@@ -1,17 +1,26 @@
 var express = require('express');
-var wikiRouter = express.Router();
+var router = express.Router();
+var models = require('../models/');
+var Page = models.Page; 
+var User = models.User; 
 
-wikiRouter.get('/', function (req, res, next) {
+router.get('/', function (req, res, next) {
 
   res.redirect('/');
 })
 
-wikiRouter.post('/', function (req, res, next) {
-  res.json(req.body);
+router.post('/', function (req, res, next) {
+  var page = new Page({
+    title: req.body.title,
+    content: 'req.body.content'
+  });
+  page.save();
+  res.redirect('/');
+  next();
 })
 
-wikiRouter.get('/add', function (req, res, next) {
+router.get('/add', function (req, res, next) {
   res.render('addpage');
 })
 
-module.exports = wikiRouter;
+module.exports = router;
